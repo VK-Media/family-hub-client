@@ -1,0 +1,10 @@
+@import '../styles/variables';
+
+.app {
+    padding: 5vh 0;
+    text-align: center;
+
+    h1 {
+        margin-bottom: $spacer;
+    }
+}
