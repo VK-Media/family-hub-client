@@ -1,0 +1,38 @@
+@import '../../../styles/variables';
+
+.date {
+    background-color: $cobalt;
+    padding: $spacer * 0.5;
+    transition: background-color 0.4s;
+
+    &:hover {
+        background-color: lighten($cobalt, 10);
+        cursor: pointer;
+    }
+
+    &.faded {
+        .number {
+            color: lighten($cobalt, 15);
+        }
+    }
+
+    &.current {
+        background-color: $blue;
+    }
+
+    &.year {
+        padding: 0;
+
+        > * {
+            font-size: 0.7em;
+        }
+    }
+
+    .number {
+        color: $white;
+    }
+
+    .week {
+        color: lighten($cobalt, 15);
+    }
+}
