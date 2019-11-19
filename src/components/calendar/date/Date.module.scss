@@ -1,38 +1,42 @@
 @import '../../../styles/variables';
 
 .date {
-    background-color: $cobalt;
-    padding: $spacer * 0.5;
-    transition: background-color 0.4s;
+	background-color: $cobalt;
+	padding: $spacer * 0.5;
+	transition: background-color 0.4s;
 
-    &:hover {
-        background-color: lighten($cobalt, 10);
-        cursor: pointer;
-    }
+	&:hover {
+		background-color: lighten($cobalt, 10);
+		cursor: pointer;
+	}
 
-    &.faded {
-        .number {
-            color: lighten($cobalt, 15);
-        }
-    }
+	&.faded {
+		.number {
+			color: lighten($cobalt, 15);
+		}
+	}
 
-    &.current {
-        background-color: $blue;
-    }
+	&.current {
+		background-color: $blue;
+	}
 
-    &.year {
-        padding: 0;
+	&.year {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0;
+		border-radius: 5px;
 
-        > * {
-            font-size: 0.7em;
-        }
-    }
+		> * {
+			font-size: 0.7em;
+		}
+	}
 
-    .number {
-        color: $white;
-    }
+	.number {
+		color: $white;
+	}
 
-    .week {
-        color: lighten($cobalt, 15);
-    }
+	.week {
+		color: lighten($cobalt, 15);
+	}
 }
