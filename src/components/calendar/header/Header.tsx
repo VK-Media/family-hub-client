@@ -1,44 +1,44 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { connect } from 'react-redux'
 
 import styles from './Header.module.scss'
 
+import { changeViewMode } from '../../../redux/calendar/calendar.actions'
+import { viewModes } from '../../../types/calendar/calendar.types'
+import { IState } from '../../../types/redux/state.types'
 import { ReactComponent as Left } from './chevron-left-light.svg'
 import { ReactComponent as Right } from './chevron-right-light.svg'
 
 interface IHeaderProps {
 	heading: string
-	viewMode: string
-	setViewMode(view: string): void
+	viewMode: viewModes
 	prevClicked(): void
 	todayClicked(): void
 	nextClicked(): void
+	changeViewMode(viewMode: viewModes): void
 }
 
 const Header: React.FC<IHeaderProps> = ({
 	heading,
 	viewMode,
-	setViewMode,
 	prevClicked,
 	todayClicked,
-	nextClicked
+	nextClicked,
+	changeViewMode
 }) => {
 	const { t } = useTranslation()
 
 	const renderViewModeButtons = () => {
-		const viewModes = ['Year', 'Month', 'Week']
+		const viewModeLabels = ['Year', 'Month', 'Week']
 
-		return viewModes.map(view => {
-			const lowerCase = view.toLowerCase()
-
+		return viewModeLabels.map((view, i) => {
 			return (
 				<div
 					key={view}
-					className={
-						viewMode === lowerCase ? styles.active : undefined
-					}
+					className={viewMode === i ? styles.active : undefined}
 					onClick={() => {
-						setViewMode(lowerCase)
+						changeViewMode(i)
 					}}
 				>
 					{t(view)}
@@ -66,4 +66,10 @@ const Header: React.FC<IHeaderProps> = ({
 	)
 }
 
-export default Header
+const mapStateToProps = (state: IState) => {
+	return {
+		viewMode: state.calendar.viewMode
+	}
+}
+
+export default connect(mapStateToProps, { changeViewMode })(Header)

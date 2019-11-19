@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 
+import { changeDisplayDate } from '../../../redux/calendar/calendar.actions'
 import { IMonthProps } from '../../../types/calendar/calendar.types'
+import { IState } from '../../../types/redux/state.types'
 import {
 	getDaysLabels,
 	getMonthDates,
@@ -12,12 +15,7 @@ import Date from '../date/Date'
 import Header from '../header/Header'
 import styles from './Month.module.scss'
 
-const Month: React.FC<IMonthProps> = ({
-	displayDate,
-	setDisplayDate,
-	viewMode,
-	setViewMode
-}) => {
+const Month: React.FC<IMonthProps> = ({ displayDate, changeDisplayDate }) => {
 	const [months, setMonths] = useState<string[]>([])
 	const [days, setDays] = useState<string[]>([])
 
@@ -40,9 +38,9 @@ const Month: React.FC<IMonthProps> = ({
 		const today = getToday()
 
 		if (previousYear === today.year && previousMonth === today.month) {
-			setDisplayDate({ ...today })
+			changeDisplayDate({ ...today })
 		} else {
-			setDisplayDate({
+			changeDisplayDate({
 				year: previousYear,
 				month: previousMonth,
 				date: undefined
@@ -51,7 +49,7 @@ const Month: React.FC<IMonthProps> = ({
 	}
 
 	const goToToday = () => {
-		setDisplayDate({ ...getToday() })
+		changeDisplayDate({ ...getToday() })
 	}
 
 	const goToNextMonth = () => {
@@ -66,9 +64,9 @@ const Month: React.FC<IMonthProps> = ({
 		const today = getToday()
 
 		if (nextYear === today.year && nextMonth === today.month) {
-			setDisplayDate({ ...today })
+			changeDisplayDate({ ...today })
 		} else {
-			setDisplayDate({
+			changeDisplayDate({
 				year: nextYear,
 				month: nextMonth,
 				date: undefined
@@ -97,11 +95,9 @@ const Month: React.FC<IMonthProps> = ({
 	}
 
 	return (
-		<div className={`${styles.calendar} ${styles[viewMode]}`}>
+		<div className={`${styles.calendar} ${styles.month}`}>
 			<Header
 				heading={headerHeading}
-				viewMode={viewMode}
-				setViewMode={setViewMode}
 				prevClicked={goToPreviousMonth}
 				todayClicked={goToToday}
 				nextClicked={goToNextMonth}
@@ -112,4 +108,10 @@ const Month: React.FC<IMonthProps> = ({
 	)
 }
 
-export default Month
+const mapStateToProps = (state: IState) => {
+	return {
+		displayDate: state.calendar.displayDate
+	}
+}
+
+export default connect(mapStateToProps, { changeDisplayDate })(Month)

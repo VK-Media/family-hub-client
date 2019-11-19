@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 
+import { changeDisplayDate } from '../../../redux/calendar/calendar.actions'
 import { IYearProps } from '../../../types/calendar/calendar.types'
+import { IState } from '../../../types/redux/state.types'
 import {
 	getDaysLabels,
 	getMonthDates,
@@ -12,12 +15,7 @@ import Header from '../header/Header'
 
 import styles from './Year.module.scss'
 
-const Year: React.FC<IYearProps> = ({
-	displayDate,
-	setDisplayDate,
-	viewMode,
-	setViewMode
-}) => {
+const Year: React.FC<IYearProps> = ({ displayDate, changeDisplayDate }) => {
 	const [months, setMonths] = useState<string[]>([])
 	const [days, setDays] = useState<string[]>([])
 
@@ -59,23 +57,21 @@ const Year: React.FC<IYearProps> = ({
 	}
 
 	const goToPreviousYear = () => {
-		setDisplayDate({ ...displayDate, year: displayDate.year - 1 })
+		changeDisplayDate({ ...displayDate, year: displayDate.year - 1 })
 	}
 
 	const goToToday = () => {
-		setDisplayDate({ ...getToday() })
+		changeDisplayDate({ ...getToday() })
 	}
 
 	const goToNextYear = () => {
-		setDisplayDate({ ...displayDate, year: displayDate.year + 1 })
+		changeDisplayDate({ ...displayDate, year: displayDate.year + 1 })
 	}
 
 	return (
-		<div className={`${styles.calendar} ${styles[viewMode]}`}>
+		<div className={`${styles.calendar} ${styles.year}`}>
 			<Header
 				heading={`${displayDate.year}`}
-				viewMode={viewMode}
-				setViewMode={setViewMode}
 				prevClicked={goToPreviousYear}
 				todayClicked={goToToday}
 				nextClicked={goToNextYear}
@@ -85,4 +81,10 @@ const Year: React.FC<IYearProps> = ({
 	)
 }
 
-export default Year
+const mapStateToProps = (state: IState) => {
+	return {
+		displayDate: state.calendar.displayDate
+	}
+}
+
+export default connect(mapStateToProps, { changeDisplayDate })(Year)

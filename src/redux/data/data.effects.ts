@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk'
 import { DataAction, IDataState } from '../../types/redux/data.types'
 
-import dataApi from '../../apis/data.api'
+import dataApi from '../../apis/server.api'
 
 import { addTextToData } from './data.action'
 

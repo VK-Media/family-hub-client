@@ -1,45 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 
-import { IDisplayDate } from '../../types/calendar/calendar.types'
-import { getToday } from '../../utils/calendar/calendar.utils'
+import { viewModes } from '../../types/calendar/calendar.types'
+import { IState } from '../../types/redux/state.types'
 import MonthView from './views/Month'
 import YearView from './views/Year'
 
 import styles from './Calendar.module.scss'
 
-const Calendar: React.FC = () => {
-	const [displayDate, setDisplayDate] = useState<IDisplayDate>({
-		...getToday()
-	})
-	const [viewMode, setViewMode] = useState('year')
+interface ICalendarProps {
+	viewMode: viewModes
+}
 
-	// TODO: Add different views (year, month, week, day)
+const Calendar: React.FC<ICalendarProps> = ({ viewMode }) => {
 	// TODO: Add modal for adding new calendar event
 
 	switch (viewMode) {
-		case 'year':
-			return (
-				<YearView
-					displayDate={displayDate}
-					setDisplayDate={setDisplayDate}
-					viewMode={viewMode}
-					setViewMode={setViewMode}
-				/>
-			)
-		case 'week':
-			return (
-				<div className={`${styles.calendar} ${styles[viewMode]}`}></div>
-			)
+		case 0:
+			return <YearView />
+		case 2:
+			return <div className={`${styles.calendar} ${styles[viewMode]}`} />
 		default:
-			return (
-				<MonthView
-					displayDate={displayDate}
-					setDisplayDate={setDisplayDate}
-					viewMode={viewMode}
-					setViewMode={setViewMode}
-				/>
-			)
+			return <MonthView />
 	}
 }
 
-export default Calendar
+const mapStateToProps = (state: IState) => {
+	return {
+		viewMode: state.calendar.viewMode
+	}
+}
+
+export default connect(mapStateToProps, {})(Calendar)

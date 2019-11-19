@@ -23,14 +23,35 @@ export interface IDate {
 
 export interface IMonthProps {
 	displayDate: IDisplayDate
-	setDisplayDate(displayDate: IDisplayDate): void
-	viewMode: string
-	setViewMode(view: string): void
+	changeDisplayDate(displayDate: IDisplayDate): void
 }
 
 export interface IYearProps {
 	displayDate: IDisplayDate
-	setDisplayDate(displayDate: IDisplayDate): void
-	viewMode: string
-	setViewMode(view: string): void
+	changeDisplayDate(displayDate: IDisplayDate): void
 }
+
+import { Action } from 'redux'
+
+export enum viewModes {
+	WEEK,
+	MONTH,
+	YEAR
+}
+
+export interface ICalendarState {
+	viewMode: viewModes
+	displayDate: IDisplayDate
+}
+
+export interface IChangeViewMode extends Action {
+	type: 'changeViewMode'
+	payload: viewModes
+}
+
+export interface IChangeDisplayDate extends Action {
+	type: 'changeDisplayDate'
+	payload: IDisplayDate
+}
+
+export type CalendarAction = IChangeViewMode | IChangeDisplayDate
