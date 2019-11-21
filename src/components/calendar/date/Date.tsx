@@ -1,18 +1,10 @@
 import moment from 'moment'
 import React from 'react'
 
+import { IDateProps } from '../../../types/calendar/calendar.types'
 import { addLeadingZero } from '../../../utils/calendar/calendar.utils'
 
 import styles from './Date.module.scss'
-
-interface IDateProps {
-	year: number
-	month: number
-	date: number
-	fade?: boolean
-	current?: boolean
-	view?: string
-}
 
 const Date: React.FC<IDateProps> = ({
 	year,

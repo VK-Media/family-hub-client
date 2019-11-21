@@ -1,3 +1,5 @@
+import { Action } from 'redux'
+
 export interface IMonthDetails {
 	month: number
 	year: number
@@ -21,6 +23,11 @@ export interface IDate {
 	fade?: boolean
 }
 
+export interface IWeekProps {
+	displayDate: IDisplayDate
+	changeDisplayDate(displayDate: IDisplayDate): void
+}
+
 export interface IMonthProps {
 	displayDate: IDisplayDate
 	changeDisplayDate(displayDate: IDisplayDate): void
@@ -31,7 +38,14 @@ export interface IYearProps {
 	changeDisplayDate(displayDate: IDisplayDate): void
 }
 
-import { Action } from 'redux'
+export interface IDateProps {
+	year: number
+	month: number
+	date: number
+	fade?: boolean
+	current?: boolean
+	view?: string
+}
 
 export enum viewModes {
 	WEEK,
@@ -42,6 +56,10 @@ export enum viewModes {
 export interface ICalendarState {
 	viewMode: viewModes
 	displayDate: IDisplayDate
+}
+
+export interface ICalendarProps {
+	viewMode: viewModes
 }
 
 export interface IChangeViewMode extends Action {

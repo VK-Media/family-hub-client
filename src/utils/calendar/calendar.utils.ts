@@ -160,3 +160,12 @@ export const getMonthDates = (displayDate: IDisplayDate): IDate[] => {
 
 	return dates
 }
+
+export const getMomentFromDisplayDate = (displayDate: IDisplayDate) => {
+	const monthString = addLeadingZero(displayDate.month + 1)
+	const dateString = displayDate.date
+		? addLeadingZero(displayDate.date)
+		: '01'
+
+	return moment(`${displayDate.year}-${monthString}-${dateString}`)
+}

@@ -6,6 +6,7 @@ import { IMonthProps } from '../../../types/calendar/calendar.types'
 import { IState } from '../../../types/redux/state.types'
 import {
 	getDaysLabels,
+	getMomentFromDisplayDate,
 	getMonthDates,
 	getMonthLabels,
 	getToday
@@ -19,6 +20,8 @@ const Month: React.FC<IMonthProps> = ({ displayDate, changeDisplayDate }) => {
 	const [months, setMonths] = useState<string[]>([])
 	const [days, setDays] = useState<string[]>([])
 
+	const currentMoment = getMomentFromDisplayDate(displayDate)
+
 	useEffect(() => {
 		getMonthLabels().then(res => setMonths(res))
 		getDaysLabels().then(res => setDays(res))
@@ -27,25 +30,13 @@ const Month: React.FC<IMonthProps> = ({ displayDate, changeDisplayDate }) => {
 	const headerHeading = `${months[displayDate.month]} ${displayDate.year}`
 
 	const goToPreviousMonth = () => {
-		let previousYear = displayDate.year
-		let previousMonth = displayDate.month - 1
+		const previousMonth = currentMoment.subtract(1, 'month')
 
-		if (displayDate.month === 0) {
-			previousYear = displayDate.year - 1
-			previousMonth = 11
-		}
-
-		const today = getToday()
-
-		if (previousYear === today.year && previousMonth === today.month) {
-			changeDisplayDate({ ...today })
-		} else {
-			changeDisplayDate({
-				year: previousYear,
-				month: previousMonth,
-				date: undefined
-			})
-		}
+		changeDisplayDate({
+			year: previousMonth.year(),
+			month: previousMonth.month(),
+			date: previousMonth.date()
+		})
 	}
 
 	const goToToday = () => {
@@ -53,25 +44,13 @@ const Month: React.FC<IMonthProps> = ({ displayDate, changeDisplayDate }) => {
 	}
 
 	const goToNextMonth = () => {
-		let nextYear = displayDate.year
-		let nextMonth = displayDate.month + 1
+		const nextMonth = currentMoment.add(1, 'month')
 
-		if (displayDate.month === 11) {
-			nextYear = displayDate.year + 1
-			nextMonth = 0
-		}
-
-		const today = getToday()
-
-		if (nextYear === today.year && nextMonth === today.month) {
-			changeDisplayDate({ ...today })
-		} else {
-			changeDisplayDate({
-				year: nextYear,
-				month: nextMonth,
-				date: undefined
-			})
-		}
+		changeDisplayDate({
+			year: nextMonth.year(),
+			month: nextMonth.month(),
+			date: nextMonth.date()
+		})
 	}
 
 	const renderDays = () => {

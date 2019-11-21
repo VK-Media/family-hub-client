@@ -1,16 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { viewModes } from '../../types/calendar/calendar.types'
+import { ICalendarProps } from '../../types/calendar/calendar.types'
 import { IState } from '../../types/redux/state.types'
 import MonthView from './views/Month'
+import WeekView from './views/Week'
 import YearView from './views/Year'
-
-import styles from './Calendar.module.scss'
-
-interface ICalendarProps {
-	viewMode: viewModes
-}
 
 const Calendar: React.FC<ICalendarProps> = ({ viewMode }) => {
 	// TODO: Add modal for adding new calendar event
@@ -19,7 +14,7 @@ const Calendar: React.FC<ICalendarProps> = ({ viewMode }) => {
 		case 0:
 			return <YearView />
 		case 2:
-			return <div className={`${styles.calendar} ${styles[viewMode]}`} />
+			return <WeekView />
 		default:
 			return <MonthView />
 	}

@@ -1,71 +1,76 @@
 @import '../../../styles/variables';
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-    h1 {
-        padding: $spacer * 0.5;
-        height: $spacer * 2.5;
-        color: $white;
-    }
+	> * {
+		width: calc(100% / 3);
+	}
 
-    .view {
-        display: flex;
+	h1 {
+		padding: $spacer * 0.5;
+		height: $spacer * 2.5;
+		color: $white;
+	}
 
-        div {
-            color: $white;
-            font-size: 0.7em;
-            text-transform: uppercase;
-            transition: all 0.4s;
-            border: 1px solid $white;
-            border-radius: 3px;
-            padding: $spacer * 0.25;
+	.view {
+		display: flex;
+		justify-content: center;
 
-            &:not(:last-child) {
-                margin-right: $spacer * 0.5;
-            }
+		div {
+			color: $white;
+			font-size: 0.7em;
+			text-transform: uppercase;
+			transition: all 0.4s;
+			border: 1px solid $white;
+			border-radius: 3px;
+			padding: $spacer * 0.25;
 
-            &:hover,
-            &.active {
-                color: $green;
-                border: 1px solid $green;
-                cursor: pointer;
-            }
-        }
-    }
+			&:not(:last-child) {
+				margin-right: $spacer * 0.5;
+			}
 
-    .buttons {
-        padding: $spacer * 0.5;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+			&:hover,
+			&.active {
+				color: $green;
+				border: 1px solid $green;
+				cursor: pointer;
+			}
+		}
+	}
 
-        > * {
-            color: $white;
-        }
+	.buttons {
+		padding: $spacer * 0.5;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
 
-        svg {
-            fill: $white;
-            width: $spacer;
-            height: $spacer;
-            transition: fill 0.4s;
+		> * {
+			color: $white;
+		}
 
-            &:hover {
-                cursor: pointer;
-                fill: $green;
-            }
-        }
+		svg {
+			fill: $white;
+			width: $spacer;
+			height: $spacer;
+			transition: fill 0.4s;
 
-        .today {
-            margin: 0 $spacer;
-            transition: color 0.4s;
+			&:hover {
+				cursor: pointer;
+				fill: $green;
+			}
+		}
 
-            &:hover {
-                cursor: pointer;
-                color: $green;
-            }
-        }
-    }
+		.today {
+			margin: 0 $spacer;
+			transition: color 0.4s;
+
+			&:hover {
+				cursor: pointer;
+				color: $green;
+			}
+		}
+	}
 }
