@@ -1,0 +1,29 @@
+@import '../../../../styles/variables';
+
+.event-form {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: $white;
+	box-shadow: 3px 3px 6px lighten($black, 10);
+	padding: $spacer;
+
+	&.active {
+		display: block;
+	}
+
+	label {
+		display: block;
+		margin-bottom: $spacer * 0.25;
+	}
+
+	input {
+		width: 100%;
+		padding: $spacer * 0.5;
+		border-radius: 5px;
+		border: 0;
+		margin-bottom: $spacer;
+	}
+}

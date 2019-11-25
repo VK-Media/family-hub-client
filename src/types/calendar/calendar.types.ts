@@ -42,6 +42,7 @@ export interface IDateProps {
 	year: number
 	month: number
 	date: number
+	toggleEventForm(): void
 	fade?: boolean
 	current?: boolean
 	view?: string
@@ -56,6 +57,7 @@ export enum viewModes {
 export interface ICalendarState {
 	viewMode: viewModes
 	displayDate: IDisplayDate
+	showEventForm: boolean
 }
 
 export interface ICalendarProps {
@@ -72,4 +74,60 @@ export interface IChangeDisplayDate extends Action {
 	payload: IDisplayDate
 }
 
-export type CalendarAction = IChangeViewMode | IChangeDisplayDate
+export interface IToggleEventForm extends Action {
+	type: 'toggleEventForm'
+}
+
+export type CalendarAction =
+	| IChangeViewMode
+	| IChangeDisplayDate
+	| IToggleEventForm
+
+export interface IEventFormProps {
+	showEventForm: boolean
+	toggleEventForm(): void
+}
+
+export enum PeriodOption {
+	Daily = 'DAILY',
+	Weekly = 'WEEKLY',
+	Monthly = 'MONTHLY',
+	Yearly = 'Yearly'
+}
+
+export enum WeekDays { // TODO: Find a more optimal way to do this
+	Monday = 'Monday',
+	Tuesday = 'Tuesday',
+	Wednesday = 'Wednesday',
+	Thursday = 'Thursday',
+	Friday = 'Friday',
+	Saturday = 'Saturday',
+	Sunday = 'Sunday'
+}
+
+export interface IEventException {
+	startTime: Date
+	endTime: Date
+	removed?: boolean
+}
+
+export interface ICreateTimeDetails {
+	startTime?: Date
+	endTime?: Date
+	allDay?: boolean
+	repeat?: {
+		frequency: PeriodOption
+		onWeekdays?: WeekDays[]
+		endRepeat?: Date
+		exceptions?: IEventException[]
+	}
+}
+
+export interface ICreateEventInput {
+	title: string
+	description?: string
+	location?: string
+	timeDetails: ICreateTimeDetails
+	alert?: Date
+	participants: string[]
+}

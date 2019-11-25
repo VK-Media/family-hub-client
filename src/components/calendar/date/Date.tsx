@@ -1,6 +1,8 @@
 import moment from 'moment'
 import React from 'react'
+import { connect } from 'react-redux'
 
+import { toggleEventForm } from '../../../redux/calendar/calendar.actions'
 import { IDateProps } from '../../../types/calendar/calendar.types'
 import { addLeadingZero } from '../../../utils/calendar/calendar.utils'
 
@@ -12,7 +14,8 @@ const Date: React.FC<IDateProps> = ({
 	date,
 	fade,
 	current,
-	view
+	view,
+	toggleEventForm
 }) => {
 	const monthString = addLeadingZero(month + 1)
 	const dateString = addLeadingZero(date)
@@ -45,11 +48,11 @@ const Date: React.FC<IDateProps> = ({
 	}
 
 	return (
-		<div className={classes.join(' ')}>
+		<div className={classes.join(' ')} onClick={toggleEventForm}>
 			<div className={styles.number}>{date}.</div>
 			{renderWeekNumber()}
 		</div>
 	)
 }
 
-export default Date
+export default connect(null, { toggleEventForm })(Date)
