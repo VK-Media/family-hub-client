@@ -1,0 +1,62 @@
+@import '../../../../styles/variables';
+
+.event-form {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: lighten($cobalt, 10);
+	box-shadow: 3px 3px 6px lighten($black, 10);
+	border-radius: 5px;
+	width: calc(100% - (#{$spacer} * 2));
+	max-width: 400px;
+
+	&.active {
+		display: block;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		padding: $spacer * 0.5;
+		border: 0;
+		background-color: transparent;
+		color: $white;
+
+		&::placeholder {
+			color: lighten($cobalt, 35);
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	textarea {
+		resize: none;
+		height: 40px;
+		transition: height 0.4s;
+
+		&:focus {
+			height: 120px;
+		}
+	}
+
+	.submit {
+		-webkit-appearance: none;
+		background-color: $green;
+		width: 100%;
+		border-radius: 0 0 5px 5px;
+		border: 0;
+		height: $spacer * 2;
+		color: $white;
+		font-weight: 700;
+		transition: background-color 0.4s;
+
+		&:hover {
+			cursor: pointer;
+			background-color: darken($green, 5);
+		}
+	}
+}

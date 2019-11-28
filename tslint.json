@@ -20,6 +20,9 @@
 		"indent": false,
 		"trailing-comma": false,
 		"jsx-wrap-multiline": false,
-		"arrow-parens": false
+		"arrow-parens": false,
+		"jsx-no-multiline-js": false,
+		"jsx-no-lambda": false,
+		"no-shadowed-variable": false
 	}
 }

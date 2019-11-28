@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 
-import dataReducer from './data/data.reducer'
+// import dataReducer from './data/data.reducer'
+import calendarReducer from './calendar/calendar.reducers'
 
 const reducer = combineReducers({
-	data: dataReducer
+	calendar: calendarReducer
 })
 
 export default reducer

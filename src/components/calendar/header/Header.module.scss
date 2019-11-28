@@ -1,0 +1,76 @@
+@import '../../../styles/variables';
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	> * {
+		width: calc(100% / 3);
+	}
+
+	h1 {
+		padding: $spacer * 0.5;
+		height: $spacer * 2.5;
+		color: $white;
+	}
+
+	.view {
+		display: flex;
+		justify-content: center;
+
+		div {
+			color: $white;
+			font-size: 0.7em;
+			text-transform: uppercase;
+			transition: all 0.4s;
+			border: 1px solid $white;
+			border-radius: 3px;
+			padding: $spacer * 0.25;
+
+			&:not(:last-child) {
+				margin-right: $spacer * 0.5;
+			}
+
+			&:hover,
+			&.active {
+				color: $green;
+				border: 1px solid $green;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.buttons {
+		padding: $spacer * 0.5;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+
+		> * {
+			color: $white;
+		}
+
+		svg {
+			fill: $white;
+			width: $spacer;
+			height: $spacer;
+			transition: fill 0.4s;
+
+			&:hover {
+				cursor: pointer;
+				fill: $green;
+			}
+		}
+
+		.today {
+			margin: 0 $spacer;
+			transition: color 0.4s;
+
+			&:hover {
+				cursor: pointer;
+				color: $green;
+			}
+		}
+	}
+}
