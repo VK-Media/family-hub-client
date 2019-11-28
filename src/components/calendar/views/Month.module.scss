@@ -1,0 +1,30 @@
+@import '../../../styles/variables';
+
+.calendar {
+    background-color: $cobalt;
+    height: 100%;
+
+    &.month {
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 1px;
+
+            &.body {
+                grid-template-rows: repeat(6, 1fr);
+                height: calc(100% - #{$spacer} * 4);
+                background-color: lighten($cobalt, 10);
+                border-top: 1px solid lighten($cobalt, 10);
+            }
+        }
+
+        .day {
+            height: $spacer * 1.5;
+            display: flex;
+            align-items: center;
+            padding: $spacer * 0.5;
+            color: $white;
+            font-size: 0.8em;
+        }
+    }
+}

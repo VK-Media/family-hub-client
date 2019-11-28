@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { connect } from 'react-redux'
 
 import { addTextToData } from '../redux/data/data.action'
 import { IDataState } from '../types/redux/data.types'
+
+import Calendar from './calendar/Calendar'
 
 import styles from './App.module.scss'
 
@@ -12,10 +14,11 @@ interface IAppProps {
 
 const App: React.FC<IAppProps> = props => {
 	return (
-		<div className={styles.app}>
-			<h1>VK Media</h1>
-			<h4>React Redux TypeScript Template</h4>
-		</div>
+		<Suspense fallback="loading...">
+			<div className={styles.app}>
+				<Calendar />
+			</div>
+		</Suspense>
 	)
 }
 

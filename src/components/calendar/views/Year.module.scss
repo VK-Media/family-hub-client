@@ -1,0 +1,54 @@
+@import '../../../styles/variables';
+
+.calendar {
+	background-color: $cobalt;
+	height: 100%;
+
+	&.year {
+		.months-container {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-gap: $spacer;
+			grid-template-rows: repeat(3, 1fr);
+			height: calc(100% - #{$spacer} * 2.5);
+
+			.month {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				padding: 1.2vw;
+
+				> * {
+					color: $white;
+				}
+
+				.month-name {
+					margin-bottom: $spacer;
+					text-align: center;
+				}
+
+				.week-days {
+					margin-bottom: $spacer;
+
+					div {
+						font-size: 0.7em;
+						color: darken($white, 10);
+						text-align: center;
+					}
+				}
+
+				.week-days,
+				.dates {
+					display: grid;
+					grid-template-columns: repeat(7, 1fr);
+					grid-gap: 1px;
+				}
+
+				.dates {
+					flex: 1;
+					grid-template-rows: repeat(6, 1fr);
+				}
+			}
+		}
+	}
+}
