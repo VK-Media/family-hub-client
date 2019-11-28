@@ -9,7 +9,8 @@ import { getToday } from '../../utils/calendar/calendar.utils'
 export const initialState: ICalendarState = {
 	viewMode: 1,
 	displayDate: { ...getToday() },
-	showEventForm: false
+	showEventForm: false,
+	eventFormDate: ''
 }
 
 const reducer = (state = initialState, action: CalendarAction) => {
@@ -22,9 +23,15 @@ const reducer = (state = initialState, action: CalendarAction) => {
 			return produce(state, draft => {
 				draft.displayDate = action.payload
 			})
-		case 'toggleEventForm':
+		case 'openEventForm':
 			return produce(state, draft => {
-				draft.showEventForm = !state.showEventForm
+				draft.showEventForm = true
+				draft.eventFormDate = action.payload
+			})
+		case 'closeEventForm':
+			return produce(state, draft => {
+				draft.showEventForm = false
+				draft.eventFormDate = ''
 			})
 		default:
 			return state

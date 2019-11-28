@@ -1,8 +1,9 @@
 import {
 	IChangeDisplayDate,
 	IChangeViewMode,
+	ICloseEventForm,
 	IDisplayDate,
-	IToggleEventForm,
+	IOpenEventForm,
 	viewModes
 } from '../../types/calendar/calendar.types'
 
@@ -18,6 +19,11 @@ export const changeDisplayDate = (
 	payload: displayDate
 })
 
-export const toggleEventForm = (): IToggleEventForm => ({
-	type: 'toggleEventForm'
+export const openEventForm = (date: string): IOpenEventForm => ({
+	type: 'openEventForm',
+	payload: date
+})
+
+export const closeEventForm = (): ICloseEventForm => ({
+	type: 'closeEventForm'
 })

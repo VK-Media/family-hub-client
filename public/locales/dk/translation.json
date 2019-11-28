@@ -26,9 +26,14 @@
 	"Month": "Måned",
 	"Week": "Uge",
 
-	"Required": "Påkrævet",
-	"Submit": "Indsend",
+	"Create": "Opret",
 	"Reset": "Nulstil",
 
-	"Title": "Titel"
+	"Title": "Titel",
+	"Start time": "Start tid",
+	"End time": "Slut tid",
+	"Description": "Beskrivelse",
+	"Location": "Lokation",
+
+	"This field is required": "Dette felt er påkrævet"
 }

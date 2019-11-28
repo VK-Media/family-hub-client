@@ -2,7 +2,7 @@ import moment from 'moment'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { toggleEventForm } from '../../../redux/calendar/calendar.actions'
+import { openEventForm } from '../../../redux/calendar/calendar.actions'
 import { IDateProps } from '../../../types/calendar/calendar.types'
 import { addLeadingZero } from '../../../utils/calendar/calendar.utils'
 
@@ -15,10 +15,11 @@ const Date: React.FC<IDateProps> = ({
 	fade,
 	current,
 	view,
-	toggleEventForm
+	openEventForm
 }) => {
 	const monthString = addLeadingZero(month + 1)
 	const dateString = addLeadingZero(date)
+	const fullDateString = `${year}-${monthString}-${dateString}`
 	const classes = [styles.date]
 
 	if (fade) {
@@ -35,9 +36,9 @@ const Date: React.FC<IDateProps> = ({
 
 	const renderWeekNumber = () => {
 		if (view === 'month') {
-			const fullDate = moment(`${year}-${monthString}-${dateString}`)
-			const week = fullDate.isoWeek()
-			const isMonday = fullDate.weekday() === 1
+			const fullDateMoment = moment(fullDateString)
+			const week = fullDateMoment.isoWeek()
+			const isMonday = fullDateMoment.weekday() === 1
 
 			if (isMonday) {
 				return <div className={styles.week}>{week}</div>
@@ -48,11 +49,16 @@ const Date: React.FC<IDateProps> = ({
 	}
 
 	return (
-		<div className={classes.join(' ')} onClick={toggleEventForm}>
+		<div
+			className={classes.join(' ')}
+			onClick={() => {
+				openEventForm(fullDateString)
+			}}
+		>
 			<div className={styles.number}>{date}.</div>
 			{renderWeekNumber()}
 		</div>
 	)
 }
 
-export default connect(null, { toggleEventForm })(Date)
+export default connect(null, { openEventForm })(Date)

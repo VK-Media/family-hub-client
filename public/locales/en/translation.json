@@ -26,9 +26,14 @@
 	"Month": "Month",
 	"Week": "Week",
 
-	"Required": "Required",
-	"Submit": "Submit",
+	"Create": "Create",
 	"Reset": "Reset",
 
-	"Title": "Title"
+	"Title": "Title",
+	"Start time": "Start time",
+	"End time": "End time",
+	"Description": "Description",
+	"Location": "Location",
+
+	"This field is required": "This field is required"
 }
