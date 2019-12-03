@@ -34,6 +34,22 @@
 	"End time": "End time",
 	"Description": "Description",
 	"Location": "Location",
+	"Name": "Name",
+	"Email": "Email",
+	"Password": "Password",
+	"Repeat Password": "Repeat Password",
 
-	"This field is required": "This field is required"
+	"This field is required": "This field is required",
+	"The password fields must match": "The password fields must match",
+
+	"Home": "Home",
+	"Login": "Login",
+	"Log in": "Log in",
+	"Register": "Register",
+
+	"/login": "/login",
+	"/register": "/register",
+
+	"Family Hub": "Family Hub",
+	"The ultimate tool for managing your family!": "The ultimate tool for managing your family!"
 }
