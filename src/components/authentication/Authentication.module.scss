@@ -1,48 +1,26 @@
 @import '../../styles/variables';
 
-.container {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+.background {
+	background: rgb(155, 89, 182);
+	background: linear-gradient(
+		45deg,
+		rgba(155, 89, 182, 1) 0%,
+		rgba(52, 152, 219, 1) 100%
+	);
 	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-	.left,
-	.right {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 10vw;
-
-		> div {
-			width: 100%;
-		}
+	.content {
+		box-shadow: $shadow2;
+		width: 90%;
+		max-width: 450px;
+		padding: $spacer * 2;
+		background-color: $white;
 
 		h1 {
 			margin-bottom: $spacer * 2;
-		}
-
-		h2 {
-			font-size: 4rem;
-			color: $white;
-			text-align: center;
-			margin-bottom: $spacer;
-		}
-	}
-
-	.right {
-		background: rgb(155, 89, 182);
-		background: linear-gradient(
-			45deg,
-			rgba(155, 89, 182, 1) 0%,
-			rgba(52, 152, 219, 1) 100%
-		);
-		box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
-
-		p {
-			text-align: center;
-			color: $white;
-			font-size: 1.6rem;
-			font-style: italic;
-			font-weight: 300;
 		}
 	}
 }

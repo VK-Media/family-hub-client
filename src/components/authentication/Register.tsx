@@ -57,94 +57,81 @@ const Signup: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.left}>
-				<div>
-					<h1>{t('Register')}</h1>
-					<Form
-						onSubmit={onSubmit}
-						validate={validate}
-						render={({
-							handleSubmit,
-							form,
-							submitting,
-							pristine
-						}) => (
-							<form
-								onSubmit={event => {
-									const promise = handleSubmit(event)
+		<div className={styles.background}>
+			<div className={styles.content}>
+				<h1>{t('Register')}</h1>
+				<Form
+					onSubmit={onSubmit}
+					validate={validate}
+					render={({ handleSubmit, form, submitting, pristine }) => (
+						<form
+							onSubmit={event => {
+								const promise = handleSubmit(event)
 
-									if (promise) {
-										promise.then(() => {
-											form.reset()
-										})
-									}
+								if (promise) {
+									promise.then(() => {
+										form.reset()
+									})
+								}
 
-									return promise
-								}}
-								className={formStyles.form}
+								return promise
+							}}
+							className={formStyles.form}
+						>
+							<div className={formStyles['input-wrapper']}>
+								<i className="fal fa-user" />
+								<Field
+									name="name"
+									component="input"
+									type="text"
+									className={formStyles.input}
+									placeholder={t('Name')}
+								/>
+							</div>
+
+							<div className={formStyles['input-wrapper']}>
+								<i className="fal fa-at" />
+								<Field
+									name="email"
+									component="input"
+									type="text"
+									className={formStyles.input}
+									placeholder={t('Email')}
+								/>
+							</div>
+
+							<div className={formStyles['input-wrapper']}>
+								<i className="fal fa-lock-alt" />
+								<Field
+									name="password"
+									component="input"
+									type="password"
+									className={formStyles.input}
+									placeholder={t('Password')}
+								/>
+							</div>
+
+							<div className={formStyles['input-wrapper']}>
+								<i className="fal fa-lock-alt" />
+								<Field
+									name="repeatPassword"
+									component="input"
+									type="password"
+									className={formStyles.input}
+									placeholder={t('Repeat Password')}
+								/>
+							</div>
+
+							<button
+								className={formStyles.submit}
+								type="submit"
+								disabled={submitting || pristine}
 							>
-								<div className={formStyles['input-wrapper']}>
-									<i className="fal fa-user" />
-									<Field
-										name="name"
-										component="input"
-										type="text"
-										className={formStyles.input}
-										placeholder={t('Name')}
-									/>
-								</div>
-
-								<div className={formStyles['input-wrapper']}>
-									<i className="fal fa-at" />
-									<Field
-										name="email"
-										component="input"
-										type="text"
-										className={formStyles.input}
-										placeholder={t('Email')}
-									/>
-								</div>
-
-								<div className={formStyles['input-wrapper']}>
-									<i className="fal fa-lock-alt" />
-									<Field
-										name="password"
-										component="input"
-										type="password"
-										className={formStyles.input}
-										placeholder={t('Password')}
-									/>
-								</div>
-
-								<div className={formStyles['input-wrapper']}>
-									<i className="fal fa-lock-alt" />
-									<Field
-										name="repeatPassword"
-										component="input"
-										type="password"
-										className={formStyles.input}
-										placeholder={t('Repeat Password')}
-									/>
-								</div>
-
-								<button
-									className={formStyles.submit}
-									type="submit"
-									disabled={submitting || pristine}
-								>
-									{t('Register')}
-								</button>
-							</form>
-						)}
-					/>
-				</div>
-			</div>
-			<div className={styles.right}>
-				<div>
-					<h2>{t('Family Hub')}</h2>
-					<p>{t('The ultimate tool for managing your family!')}</p>
-				</div>
+								{t('Register')}
+							</button>
+						</form>
+					)}
+				/>
 			</div>
 		</div>
 	)
