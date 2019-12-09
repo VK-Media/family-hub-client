@@ -3,17 +3,19 @@ import { Field, Form } from 'react-final-form'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
-import server from '../../apis/server.api'
+import { register } from '../../redux/authentication/authentication.effects'
 import {
 	ICreateUserInput,
 	IRegisterFormErrors,
-	IRegisterFormFields
+	IRegisterFormFields,
+	IRegisterProps
 } from '../../types/authentication/authentication.types'
+import { IState } from '../../types/general.types'
 
 import formStyles from '../../styles/forms.module.scss'
 import styles from './Authentication.module.scss'
 
-const Signup: React.FC = () => {
+const Register: React.FC<IRegisterProps> = ({ registerError, register }) => {
 	const { t } = useTranslation()
 
 	const onSubmit = (values: IRegisterFormFields) => {
@@ -23,15 +25,21 @@ const Signup: React.FC = () => {
 			password: values.password
 		}
 
-		server.post('/user', data).then(response => {
-			console.log(response)
+		return register(data)
+	}
 
-			if ('data' in response && '_id' in response.data) {
-				console.log(response)
-			} else {
-				return Promise.reject('No valid response...')
-			}
-		})
+	const renderErrorMessage = () => {
+		const classes = [formStyles.error]
+
+		if (registerError) {
+			classes.push(formStyles.active)
+		}
+
+		return (
+			<div className={classes.join(' ')}>
+				{t('Something went wrong...')}
+			</div>
+		)
 	}
 
 	const validate = (values: IRegisterFormFields): IRegisterFormErrors => {
@@ -60,11 +68,13 @@ const Signup: React.FC = () => {
 		<div className={styles.background}>
 			<div className={styles.content}>
 				<h1>{t('Register')}</h1>
+				{renderErrorMessage()}
 				<Form
 					onSubmit={onSubmit}
 					validate={validate}
 					render={({ handleSubmit, form, submitting, pristine }) => (
 						<form
+							id="register-form"
 							onSubmit={event => {
 								const promise = handleSubmit(event)
 
@@ -137,4 +147,10 @@ const Signup: React.FC = () => {
 	)
 }
 
-export default connect(null)(Signup)
+const mapStateToProps = (state: IState) => {
+	return {
+		registerError: state.authentication.registerError
+	}
+}
+
+export default connect(mapStateToProps, { register })(Register)

@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 
 import { changeDisplayDate } from '../../../redux/calendar/calendar.actions'
 import { IMonthProps } from '../../../types/calendar/calendar.types'
-import { IState } from '../../../types/redux/state.types'
+import { IState } from '../../../types/general.types'
 import {
 	getDaysLabels,
 	getMomentFromDisplayDate,
 	getMonthDates,
 	getMonthLabels,
 	getToday
-} from '../../../utils/calendar/calendar.utils'
+} from '../../../utils/calendar.utils'
 
 import Date from '../date/Date'
 import Header from '../header/Header'

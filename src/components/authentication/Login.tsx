@@ -3,32 +3,43 @@ import { Field, Form } from 'react-final-form'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
-import server from '../../apis/server.api'
+import { login } from '../../redux/authentication/authentication.effects'
 import {
 	ILoginFormErrors,
 	ILoginFormFields,
-	ILoginInput
+	ILoginInput,
+	ILoginProps
 } from '../../types/authentication/authentication.types'
+import { IState } from '../../types/general.types'
+import { submitHandler } from '../../utils/general.utils'
 
 import formStyles from '../../styles/forms.module.scss'
 import styles from './Authentication.module.scss'
 
-const Login: React.FC = () => {
+const Login: React.FC<ILoginProps> = ({ loginError, login }) => {
 	const { t } = useTranslation()
 
-	const onSubmit = (values: ILoginFormFields) => {
+	const onSubmit = async (values: ILoginFormFields) => {
 		const data: ILoginInput = {
 			email: values.email,
 			password: values.password
 		}
 
-		server.post('/auth', data).then(response => {
-			if ('data' in response && '_id' in response.data) {
-				console.log(response)
-			} else {
-				return Promise.reject('No valid response...')
-			}
-		})
+		return login(data)
+	}
+
+	const renderErrorMessage = () => {
+		const classes = [formStyles.error]
+
+		if (loginError) {
+			classes.push(formStyles.active)
+		}
+
+		return (
+			<div className={classes.join(' ')}>
+				{t('Invalid email or password')}
+			</div>
+		)
 	}
 
 	const validate = (values: ILoginFormFields): ILoginFormErrors => {
@@ -49,22 +60,15 @@ const Login: React.FC = () => {
 		<div className={styles.background}>
 			<div className={styles.content}>
 				<h1>{t('Login')}</h1>
+				{renderErrorMessage()}
 				<Form
 					onSubmit={onSubmit}
 					validate={validate}
 					render={({ handleSubmit, form, submitting, pristine }) => (
 						<form
-							onSubmit={event => {
-								const promise = handleSubmit(event)
-
-								if (promise) {
-									promise.then(() => {
-										form.reset()
-									})
-								}
-
-								return promise
-							}}
+							onSubmit={event =>
+								submitHandler(event, handleSubmit, form)
+							}
 							className={formStyles.form}
 						>
 							<div className={formStyles['input-wrapper']}>
@@ -103,4 +107,10 @@ const Login: React.FC = () => {
 	)
 }
 
-export default connect(null)(Login)
+const mapStateToProps = (state: IState) => {
+	return {
+		loginError: state.authentication.loginError
+	}
+}
+
+export default connect(mapStateToProps, { login })(Login)

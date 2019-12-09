@@ -46,6 +46,8 @@
 	"Login": "Log ind",
 	"Log in": "Log ind",
 	"Register": "Registrér",
+	"Invalid email or password": "Ugyldig email eller kodeord",
+	"Something went wrong...": "Noget gik galt...",
 
 	"/login": "/log-ind",
 	"/register": "/registrer",
