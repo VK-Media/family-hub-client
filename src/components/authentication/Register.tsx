@@ -11,6 +11,7 @@ import {
 	IRegisterProps
 } from '../../types/authentication/authentication.types'
 import { IState } from '../../types/general.types'
+import { submitHandler } from '../../utils/authentication.utils'
 
 import formStyles from '../../styles/forms.module.scss'
 import styles from './Authentication.module.scss'
@@ -75,17 +76,9 @@ const Register: React.FC<IRegisterProps> = ({ registerError, register }) => {
 					render={({ handleSubmit, form, submitting, pristine }) => (
 						<form
 							id="register-form"
-							onSubmit={event => {
-								const promise = handleSubmit(event)
-
-								if (promise) {
-									promise.then(() => {
-										form.reset()
-									})
-								}
-
-								return promise
-							}}
+							onSubmit={event =>
+								submitHandler(event, handleSubmit, form)
+							}
 							className={formStyles.form}
 						>
 							<div className={formStyles['input-wrapper']}>

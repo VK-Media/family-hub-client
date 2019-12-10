@@ -11,7 +11,7 @@ import {
 	ILoginProps
 } from '../../types/authentication/authentication.types'
 import { IState } from '../../types/general.types'
-import { submitHandler } from '../../utils/general.utils'
+import { submitHandler } from '../../utils/authentication.utils'
 
 import formStyles from '../../styles/forms.module.scss'
 import styles from './Authentication.module.scss'

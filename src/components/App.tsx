@@ -1,11 +1,13 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import { BrowserRouter, Link, Route } from 'react-router-dom'
+import { Link, Route, Router } from 'react-router-dom'
 
 import Login from './authentication/Login'
 import Register from './authentication/Register'
+import Dashboard from './dashboard/Dashboard'
 import LandingPage from './landingPage/LandingPage'
 
 import i18n from '../i18n/i18n'
+import { history } from '../utils/general.utils'
 import styles from './App.module.scss'
 
 interface IMenuLink {
@@ -42,7 +44,12 @@ const App: React.FC = () => {
 		return [
 			{ path: '/', exact: true, component: LandingPage },
 			{ path: i18n.t('/login'), exact: false, component: Login },
-			{ path: i18n.t('/register'), exact: false, component: Register }
+			{ path: i18n.t('/register'), exact: false, component: Register },
+			{
+				path: i18n.t('/app/dashboard'),
+				exact: false,
+				component: Dashboard
+			}
 		]
 	}
 
@@ -82,10 +89,10 @@ const App: React.FC = () => {
 	return (
 		<Suspense fallback="Loading...">
 			<div className={styles.app}>
-				<BrowserRouter>
+				<Router history={history}>
 					{renderMenuLinks()}
 					{renderRoutes()}
-				</BrowserRouter>
+				</Router>
 			</div>
 		</Suspense>
 	)
