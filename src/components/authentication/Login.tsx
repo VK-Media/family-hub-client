@@ -3,6 +3,7 @@ import { Field, Form } from 'react-final-form'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { setLoading } from '../../redux/authentication/authentication.actions'
 import { login } from '../../redux/authentication/authentication.effects'
 import {
 	ILoginFormErrors,
@@ -12,14 +13,22 @@ import {
 } from '../../types/authentication/authentication.types'
 import { IState } from '../../types/general.types'
 import { submitHandler } from '../../utils/authentication.utils'
+import SubmitButton from '../ui/SubmitButton'
 
 import formStyles from '../../styles/forms.module.scss'
 import styles from './Authentication.module.scss'
 
-const Login: React.FC<ILoginProps> = ({ loginError, login }) => {
+const Login: React.FC<ILoginProps> = ({
+	loginError,
+	login,
+	loading,
+	setLoading
+}) => {
 	const { t } = useTranslation()
 
 	const onSubmit = async (values: ILoginFormFields) => {
+		setLoading(true)
+
 		const data: ILoginInput = {
 			email: values.email,
 			password: values.password
@@ -35,11 +44,7 @@ const Login: React.FC<ILoginProps> = ({ loginError, login }) => {
 			classes.push(formStyles.active)
 		}
 
-		return (
-			<div className={classes.join(' ')}>
-				{t('Invalid email or password')}
-			</div>
-		)
+		return <div className={classes.join(' ')}>{loginError}</div>
 	}
 
 	const validate = (values: ILoginFormFields): ILoginFormErrors => {
@@ -92,13 +97,11 @@ const Login: React.FC<ILoginProps> = ({ loginError, login }) => {
 									placeholder={t('Password')}
 								/>
 							</div>
-							<button
-								className={formStyles.submit}
-								type="submit"
+							<SubmitButton
+								loading={loading}
 								disabled={submitting || pristine}
-							>
-								{t('Log in')}
-							</button>
+								text={t('Log in')}
+							/>
 						</form>
 					)}
 				/>
@@ -109,8 +112,9 @@ const Login: React.FC<ILoginProps> = ({ loginError, login }) => {
 
 const mapStateToProps = (state: IState) => {
 	return {
-		loginError: state.authentication.loginError
+		loginError: state.authentication.loginError,
+		loading: state.authentication.loading
 	}
 }
 
-export default connect(mapStateToProps, { login })(Login)
+export default connect(mapStateToProps, { login, setLoading })(Login)

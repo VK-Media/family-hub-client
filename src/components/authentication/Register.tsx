@@ -3,6 +3,7 @@ import { Field, Form } from 'react-final-form'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
+import { setLoading } from '../../redux/authentication/authentication.actions'
 import { register } from '../../redux/authentication/authentication.effects'
 import {
 	ICreateUserInput,
@@ -12,14 +13,22 @@ import {
 } from '../../types/authentication/authentication.types'
 import { IState } from '../../types/general.types'
 import { submitHandler } from '../../utils/authentication.utils'
+import SubmitButton from '../ui/SubmitButton'
 
 import formStyles from '../../styles/forms.module.scss'
 import styles from './Authentication.module.scss'
 
-const Register: React.FC<IRegisterProps> = ({ registerError, register }) => {
+const Register: React.FC<IRegisterProps> = ({
+	registerError,
+	register,
+	loading,
+	setLoading
+}) => {
 	const { t } = useTranslation()
 
 	const onSubmit = (values: IRegisterFormFields) => {
+		setLoading(true)
+
 		const data: ICreateUserInput = {
 			name: values.name,
 			email: values.email,
@@ -36,11 +45,7 @@ const Register: React.FC<IRegisterProps> = ({ registerError, register }) => {
 			classes.push(formStyles.active)
 		}
 
-		return (
-			<div className={classes.join(' ')}>
-				{t('Something went wrong...')}
-			</div>
-		)
+		return <div className={classes.join(' ')}>{registerError}</div>
 	}
 
 	const validate = (values: IRegisterFormFields): IRegisterFormErrors => {
@@ -125,13 +130,11 @@ const Register: React.FC<IRegisterProps> = ({ registerError, register }) => {
 								/>
 							</div>
 
-							<button
-								className={formStyles.submit}
-								type="submit"
+							<SubmitButton
+								loading={loading}
 								disabled={submitting || pristine}
-							>
-								{t('Register')}
-							</button>
+								text={t('Register')}
+							/>
 						</form>
 					)}
 				/>
@@ -142,8 +145,9 @@ const Register: React.FC<IRegisterProps> = ({ registerError, register }) => {
 
 const mapStateToProps = (state: IState) => {
 	return {
-		registerError: state.authentication.registerError
+		registerError: state.authentication.registerError,
+		loading: state.authentication.loading
 	}
 }
 
-export default connect(mapStateToProps, { register })(Register)
+export default connect(mapStateToProps, { register, setLoading })(Register)

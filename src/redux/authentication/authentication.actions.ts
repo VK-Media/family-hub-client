@@ -1,8 +1,9 @@
 import {
 	IAuthenticationState,
 	ISetAuthenticationData,
-	ISetRegisterError,
-	IToggleLoginError
+	ISetLoading,
+	ISetLoginError,
+	ISetRegisterError
 } from '../../types/authentication/authentication.types'
 
 export const setAuthenticationData = (
@@ -12,10 +13,17 @@ export const setAuthenticationData = (
 	payload: authenticationData
 })
 
-export const toggleLoginError = (): IToggleLoginError => ({
-	type: 'toggleLoginError'
+export const setLoginError = (error: string): ISetLoginError => ({
+	type: 'setLoginError',
+	payload: error
 })
 
-export const setRegisterError = (): ISetRegisterError => ({
-	type: 'setRegisterError'
+export const setRegisterError = (error: string): ISetRegisterError => ({
+	type: 'setRegisterError',
+	payload: error
+})
+
+export const setLoading = (loading: boolean): ISetLoading => ({
+	type: 'setLoading',
+	payload: loading
 })

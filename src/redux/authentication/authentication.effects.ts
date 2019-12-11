@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk'
 
 import server from '../../apis/server.api'
+import i18n from '../../i18n/i18n'
 import {
 	IAuthenticationAction,
 	IAuthenticationState,
@@ -9,8 +10,9 @@ import {
 } from '../../types/authentication/authentication.types'
 import {
 	setAuthenticationData,
-	setRegisterError,
-	toggleLoginError
+	setLoading,
+	setLoginError,
+	setRegisterError
 } from './authentication.actions'
 
 type Effect = ThunkAction<any, IAuthenticationState, any, IAuthenticationAction>
@@ -21,11 +23,13 @@ export const login = (data: ILoginInput): Effect => async dispatch => {
 
 		if (response.status === 200) {
 			dispatch(setAuthenticationData(response.data))
+			dispatch(setLoading(false))
 			return Promise.resolve()
 		}
 	} catch (error) {
 		if (error.response.status === 400) {
-			dispatch(toggleLoginError())
+			dispatch(setLoginError(i18n.t('Invalid email or password')))
+			dispatch(setLoading(false))
 			return Promise.reject()
 		}
 	}
@@ -37,11 +41,13 @@ export const register = (data: ICreateUserInput): Effect => async dispatch => {
 
 		if (response.status === 201) {
 			dispatch(setAuthenticationData(response.data))
+			dispatch(setLoading(false))
 			return Promise.resolve()
 		}
 	} catch (error) {
 		if (error.response.status === 400) {
-			dispatch(setRegisterError())
+			dispatch(setRegisterError(i18n.t('Something went wrong...')))
+			dispatch(setLoading(false))
 			return Promise.reject()
 		}
 	}

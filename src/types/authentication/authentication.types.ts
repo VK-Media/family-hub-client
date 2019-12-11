@@ -39,8 +39,9 @@ export interface ILoginFormErrors {
 export interface IAuthenticationState {
 	jwt?: string
 	user?: IUser
-	loginError: boolean
-	registerError: boolean
+	loginError: string
+	registerError: string
+	loading: boolean
 }
 
 export interface IUser {
@@ -61,28 +62,40 @@ export enum AppMode {
 
 export type IAuthenticationAction =
 	| ISetAuthenticationData
-	| IToggleLoginError
+	| ISetLoginError
 	| ISetRegisterError
+	| ISetLoading
+
+export interface ISetLoading extends Action {
+	type: 'setLoading'
+	payload: boolean
+}
 
 export interface ISetAuthenticationData extends Action {
 	type: 'setAuthenticationData'
 	payload: IAuthenticationState
 }
 
-export interface IToggleLoginError extends Action {
-	type: 'toggleLoginError'
+export interface ISetLoginError extends Action {
+	type: 'setLoginError'
+	payload: string
 }
 
 export interface ISetRegisterError extends Action {
 	type: 'setRegisterError'
+	payload: string
 }
 
 export interface ILoginProps {
-	loginError: boolean
+	loginError: string
 	login(data: ILoginInput): () => void
+	loading: boolean
+	setLoading(loading: boolean): ISetLoading
 }
 
 export interface IRegisterProps {
-	registerError: boolean
+	registerError: string
 	register(data: ICreateUserInput): () => void
+	loading: boolean
+	setLoading(loading: boolean): ISetLoading
 }

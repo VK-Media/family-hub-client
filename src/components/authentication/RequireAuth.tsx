@@ -12,10 +12,14 @@ interface IRequireAuthProps {
 }
 
 const RequireAuth: React.FC<IRequireAuthProps> = ({ jwt, user, children }) => {
-	if (!user || !jwt) {
-		return <Redirect to="/" />
-	} else {
+	let authorized = true
+
+	if (!user || !jwt) authorized = false
+
+	if (authorized) {
 		return <div>{children}</div>
+	} else {
+		return <Redirect to="/" />
 	}
 }
 
