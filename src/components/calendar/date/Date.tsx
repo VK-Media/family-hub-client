@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { openEventForm } from '../../../redux/calendar/calendar.actions'
 import { IDateProps } from '../../../types/calendar/calendar.types'
-import { addLeadingZero } from '../../../utils/calendar/calendar.utils'
+import { addLeadingZero } from '../../../utils/calendar.utils'
 
 import styles from './Date.module.scss'
 
