@@ -1,12 +1,12 @@
 import moment from 'moment'
 
-import i18n from '../../i18n/i18n'
+import i18n from '../i18n/i18n'
 
 import {
 	IDate,
 	IDisplayDate,
 	IMonthDetails
-} from '../../types/calendar/calendar.types'
+} from '../types/calendar/calendar.types'
 
 export const convertJsDay = (jsDay: number) => {
 	if (jsDay === 0) return 6

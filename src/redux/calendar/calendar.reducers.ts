@@ -4,7 +4,7 @@ import {
 	CalendarAction,
 	ICalendarState
 } from '../../types/calendar/calendar.types'
-import { getToday } from '../../utils/calendar/calendar.utils'
+import { getToday } from '../../utils/calendar.utils'
 
 export const initialState: ICalendarState = {
 	viewMode: 1,

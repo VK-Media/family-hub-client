@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { ICalendarProps } from '../../types/calendar/calendar.types'
-import { IState } from '../../types/redux/state.types'
+import { IState } from '../../types/general.types'
 import EventForm from './event/form/Form'
 import MonthView from './views/Month'
 import WeekView from './views/Week'

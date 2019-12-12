@@ -1,0 +1,34 @@
+@import '../../styles/variables';
+
+.background {
+	background: rgb(155, 89, 182);
+	background: linear-gradient(
+		45deg,
+		rgba(155, 89, 182, 1) 0%,
+		rgba(52, 152, 219, 1) 100%
+	);
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.content {
+		text-align: center;
+
+		h1,
+		p {
+			color: $white;
+		}
+
+		h1 {
+			font-size: 4rem;
+			margin-bottom: $spacer * 2;
+		}
+
+		p {
+			font-weight: 300;
+			font-size: 2rem;
+			font-style: italic;
+		}
+	}
+}

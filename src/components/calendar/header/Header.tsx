@@ -6,7 +6,7 @@ import styles from './Header.module.scss'
 
 import { changeViewMode } from '../../../redux/calendar/calendar.actions'
 import { viewModes } from '../../../types/calendar/calendar.types'
-import { IState } from '../../../types/redux/state.types'
+import { IState } from '../../../types/general.types'
 import { ReactComponent as Left } from './chevron-left-light.svg'
 import { ReactComponent as Right } from './chevron-right-light.svg'
 

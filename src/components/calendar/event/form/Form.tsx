@@ -12,7 +12,7 @@ import {
 	IEventFormProps,
 	PeriodOption
 } from '../../../../types/calendar/calendar.types'
-import { IState } from '../../../../types/redux/state.types'
+import { IState } from '../../../../types/general.types'
 
 import styles from './Form.module.scss'
 
