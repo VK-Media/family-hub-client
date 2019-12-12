@@ -30,28 +30,29 @@
 	"Reset": "Nulstil",
 
 	"Title": "Titel",
-	"Start time": "Start tid",
-	"End time": "Slut tid",
+	"Start time": "Starttid",
+	"End time": "Sluttid",
 	"Description": "Beskrivelse",
 	"Location": "Lokation",
 	"Name": "Navn",
 	"Email": "Email",
 	"Password": "Kodeord",
-	"Repeat Password": "Gentag kodeord",
+	"Repeat Password": "Bekræft kodeord",
 
 	"This field is required": "Dette felt er påkrævet",
-	"The password fields must match": "Kodeord felterne skal være ens",
+	"The password fields must match": "Dine kodeord skal være ens",
 
 	"Home": "Hjem",
 	"Login": "Log ind",
 	"Log in": "Log ind",
 	"Register": "Registrér",
-	"Invalid email or password": "Ugyldig email eller kodeord",
+	"Invalid email or password": "Forkert email eller kodeord",
 	"Something went wrong...": "Noget gik galt...",
 
 	"/login": "/log-ind",
 	"/register": "/registrer",
+	"/app/dashboard": "/app/kontrolpanel",
 
 	"Family Hub": "Family Hub",
-	"The ultimate tool for managing your family!": "Det ultimative værktøj til at organisere din familie!"
+	"The ultimate tool for managing your family": "Det ultimative værktøj til at organisere din familie"
 }

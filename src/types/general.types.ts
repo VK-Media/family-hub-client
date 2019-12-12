@@ -5,3 +5,7 @@ export interface IState {
 	calendar: ICalendarState
 	authentication: IAuthenticationState
 }
+
+export interface IAppProps {
+	setAuthenticationFromLocalStorage(): () => void
+}

@@ -51,7 +51,8 @@
 
 	"/login": "/login",
 	"/register": "/register",
+	"/app/dashboard": "/app/dashboard",
 
 	"Family Hub": "Family Hub",
-	"The ultimate tool for managing your family!": "The ultimate tool for managing your family!"
+	"The ultimate tool for managing your family": "The ultimate tool for managing your family"
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 
@@ -9,7 +9,9 @@ import './index.scss'
 
 ReactDOM.render(
 	<ProviderWrapper>
-		<App />
+		<Suspense fallback="Loading...">
+			<App />
+		</Suspense>
 	</ProviderWrapper>,
 	document.getElementById('root')
 )
