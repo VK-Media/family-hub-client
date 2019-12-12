@@ -22,7 +22,10 @@ export const login = (data: ILoginInput): Effect => async dispatch => {
 		const response = await server.post('/auth', data)
 
 		if (response.status === 200) {
-			localStorage.setItem('authentication', response.data)
+			localStorage.setItem(
+				'authentication',
+				JSON.stringify(response.data)
+			)
 
 			dispatch(setAuthenticationData(response.data))
 			dispatch(setLoading(false))
@@ -52,5 +55,13 @@ export const register = (data: ICreateUserInput): Effect => async dispatch => {
 			dispatch(setLoading(false))
 			return Promise.reject()
 		}
+	}
+}
+
+export const setAuthenticationFromLocalStorage = (): Effect => async dispatch => {
+	const localStorageAuthentication = localStorage.getItem('authentication')
+
+	if (localStorageAuthentication) {
+		dispatch(setAuthenticationData(JSON.parse(localStorageAuthentication)))
 	}
 }

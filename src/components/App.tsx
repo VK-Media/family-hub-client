@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import { Link, Route, Router } from 'react-router-dom'
 
 import Login from './authentication/Login'
@@ -7,7 +8,9 @@ import Dashboard from './dashboard/Dashboard'
 import LandingPage from './landingPage/LandingPage'
 
 import i18n from '../i18n/i18n'
+import { setAuthenticationFromLocalStorage } from '../redux/authentication/authentication.effects'
 import { history } from '../utils/general.utils'
+
 import styles from './App.module.scss'
 
 interface IMenuLink {
@@ -21,14 +24,20 @@ interface IRoute {
 	component: React.FC
 }
 
-const App: React.FC = () => {
+interface IAppProps {
+	setAuthenticationFromLocalStorage(): () => void
+}
+
+const App: React.FC<IAppProps> = ({ setAuthenticationFromLocalStorage }) => {
 	const [menuLinks, setMenuLinks] = useState<IMenuLink[]>([])
 	const [routes, setRoutes] = useState<IRoute[]>([])
 
 	useEffect(() => {
 		getMenuLinks().then(res => setMenuLinks(res))
 		getRoutes().then(res => setRoutes(res))
-	}, [])
+
+		setAuthenticationFromLocalStorage()
+	}, [setAuthenticationFromLocalStorage])
 
 	const getMenuLinks = async () => {
 		await i18n.loadNamespaces('translation')
@@ -98,4 +107,4 @@ const App: React.FC = () => {
 	)
 }
 
-export default App
+export default connect(null, { setAuthenticationFromLocalStorage })(App)
