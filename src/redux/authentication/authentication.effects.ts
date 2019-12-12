@@ -22,6 +22,8 @@ export const login = (data: ILoginInput): Effect => async dispatch => {
 		const response = await server.post('/auth', data)
 
 		if (response.status === 200) {
+			localStorage.setItem('authentication', response.data)
+
 			dispatch(setAuthenticationData(response.data))
 			dispatch(setLoading(false))
 			return Promise.resolve()

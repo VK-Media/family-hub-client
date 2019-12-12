@@ -1,4 +1,6 @@
+import { verify } from 'jsonwebtoken'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -12,14 +14,38 @@ interface IRequireAuthProps {
 }
 
 const RequireAuth: React.FC<IRequireAuthProps> = ({ jwt, user, children }) => {
-	let authorized = true
+	const { t } = useTranslation()
 
-	if (!user || !jwt) authorized = false
+	const validateJwt = (): boolean => {
+		try {
+			if (jwt && process.env.REACT_APP_JWT_SECRET) {
+				const decoded = verify(jwt, process.env.REACT_APP_JWT_SECRET, {
+					ignoreNotBefore: true
+				})
 
-	if (authorized) {
+				if (decoded) {
+					return true
+				}
+			}
+
+			return false
+		} catch (err) {
+			return false
+		}
+	}
+
+	const validateUser = (): boolean => {
+		if (user) {
+			return 'id' in user
+		}
+
+		return false
+	}
+
+	if (validateJwt() && validateUser()) {
 		return <div>{children}</div>
 	} else {
-		return <Redirect to="/" />
+		return <Redirect to={t('/login')} />
 	}
 }
 
