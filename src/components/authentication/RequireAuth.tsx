@@ -4,16 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { IUser } from '../../types/authentication/authentication.types'
 import { IState } from '../../types/general.types'
 
 interface IRequireAuthProps {
-	jwt?: string
-	user?: IUser
+	jwt: string
 	children: React.ReactNode
 }
 
-const RequireAuth: React.FC<IRequireAuthProps> = ({ jwt, user, children }) => {
+const RequireAuth: React.FC<IRequireAuthProps> = ({ jwt, children }) => {
 	const { t } = useTranslation()
 
 	const validateJwt = (): boolean => {
@@ -34,15 +32,7 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ jwt, user, children }) => {
 		}
 	}
 
-	const validateUser = (): boolean => {
-		if (user) {
-			return 'id' in user
-		}
-
-		return false
-	}
-
-	if (validateJwt() && validateUser()) {
+	if (validateJwt()) {
 		return <div>{children}</div>
 	} else {
 		return <Redirect to={t('/login')} />
@@ -51,8 +41,7 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ jwt, user, children }) => {
 
 const mapStateToProps = (state: IState) => {
 	return {
-		jwt: state.authentication.jwt,
-		user: state.authentication.user
+		jwt: state.authentication.jwt
 	}
 }
 

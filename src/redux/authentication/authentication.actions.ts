@@ -1,16 +1,13 @@
 import {
-	IAuthenticationState,
 	ISetAuthenticationData,
 	ISetLoading,
 	ISetLoginError,
 	ISetRegisterError
 } from '../../types/authentication/authentication.types'
 
-export const setAuthenticationData = (
-	authenticationData: IAuthenticationState
-): ISetAuthenticationData => ({
+export const setAuthenticationData = (jwt: string): ISetAuthenticationData => ({
 	type: 'setAuthenticationData',
-	payload: authenticationData
+	payload: jwt
 })
 
 export const setLoginError = (error: string): ISetLoginError => ({

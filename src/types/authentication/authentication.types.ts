@@ -37,8 +37,7 @@ export interface ILoginFormErrors {
 }
 
 export interface IAuthenticationState {
-	jwt?: string
-	user?: IUser
+	jwt: string
 	loginError: string
 	registerError: string
 	loading: boolean
@@ -73,7 +72,7 @@ export interface ISetLoading extends Action {
 
 export interface ISetAuthenticationData extends Action {
 	type: 'setAuthenticationData'
-	payload: IAuthenticationState
+	payload: string
 }
 
 export interface ISetLoginError extends Action {

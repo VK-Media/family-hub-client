@@ -6,6 +6,7 @@ import {
 } from '../../types/authentication/authentication.types'
 
 export const initialState: IAuthenticationState = {
+	jwt: '',
 	loginError: '',
 	registerError: '',
 	loading: false
@@ -15,8 +16,7 @@ const reducer = (state = initialState, action: IAuthenticationAction) => {
 	switch (action.type) {
 		case 'setAuthenticationData':
 			return produce(state, draft => {
-				draft.jwt = action.payload.jwt
-				draft.user = action.payload.user
+				draft.jwt = action.payload
 			})
 		case 'setLoginError':
 			return produce(state, draft => {
