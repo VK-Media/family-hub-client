@@ -9,7 +9,7 @@ i18n.use(Backend)
 	.use(initReactI18next)
 	.init({
 		debug: true,
-		fallbackLng: 'da',
+		fallbackLng: 'en',
 		interpolation: {
 			escapeValue: false
 		}
