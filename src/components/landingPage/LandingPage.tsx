@@ -9,7 +9,7 @@ const LandingPage: React.FC = () => {
 		<div className={styles.background}>
 			<div className={styles.content}>
 				<h1>{t('Family Hub')}</h1>
-				<p>{t('The ultimate tool for managing your family!')}</p>
+				<p>{t('The ultimate tool for managing your family')}</p>
 			</div>
 		</div>
 	)
