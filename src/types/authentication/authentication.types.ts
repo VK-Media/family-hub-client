@@ -37,6 +37,7 @@ export interface ILoginFormErrors {
 }
 
 export interface IAuthenticationState {
+	user?: IUser
 	jwt: string
 	loginError: string
 	registerError: string

@@ -4,21 +4,3 @@
 	height: 100vh;
 	background-color: $white;
 }
-
-.links {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	padding: $spacer;
-
-	a {
-		color: $white;
-
-		&:not(:last-of-type) {
-			margin-right: $spacer;
-		}
-	}
-}

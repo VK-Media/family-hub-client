@@ -1,4 +1,7 @@
-import { IAuthenticationState } from './authentication/authentication.types'
+import {
+	IAuthenticationState,
+	IUser
+} from './authentication/authentication.types'
 import { ICalendarState } from './calendar/calendar.types'
 
 export interface IState {
@@ -7,5 +10,10 @@ export interface IState {
 }
 
 export interface IAppProps {
+	user?: IUser
 	setAuthenticationFromLocalStorage(): () => void
+}
+
+export interface ILoaderProps {
+	show: boolean
 }

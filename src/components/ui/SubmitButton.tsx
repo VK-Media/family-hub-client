@@ -3,43 +3,23 @@ import React from 'react'
 import { ISubmitButtonProps } from '../../types/ui/ui.types'
 
 import formStyles from '../../styles/forms.module.scss'
+import Loader from '../loaders/Loader'
 
 const SubmitButton: React.FC<ISubmitButtonProps> = ({
 	text,
 	disabled,
 	loading
 }) => {
-	const submitButtonClasses = (): string => {
-		const classes = [formStyles.submit]
-
-		if (loading) {
-			classes.push(formStyles.loading)
-		}
-
-		return classes.join(' ')
-	}
-
 	const renderButtonContent = () => {
 		if (loading) {
-			return (
-				<div className={formStyles.loader}>
-					<div />
-					<div />
-					<div />
-					<div />
-				</div>
-			)
+			return <Loader show={true} />
 		}
 
 		return text
 	}
 
 	return (
-		<button
-			className={submitButtonClasses()}
-			type="submit"
-			disabled={disabled}
-		>
+		<button className={formStyles.submit} type="submit" disabled={disabled}>
 			{renderButtonContent()}
 		</button>
 	)

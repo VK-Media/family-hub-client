@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.container {
+	height: 100vh;
+	background: $purple;
+	background: linear-gradient(45deg, $purple 0%, $blue 100%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
