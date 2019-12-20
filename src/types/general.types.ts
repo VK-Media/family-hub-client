@@ -10,10 +10,14 @@ export interface IState {
 }
 
 export interface IAppProps {
-	user?: IUser
+	loading: boolean
 	setAuthenticationFromLocalStorage(): () => void
 }
 
 export interface ILoaderProps {
 	show: boolean
+}
+
+export interface ILandingPageNavigationProps {
+	jwt: string
 }

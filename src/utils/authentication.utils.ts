@@ -1,5 +1,6 @@
 import i18n from '../i18n/i18n'
 import { history } from '../utils/general.utils'
+import { verify } from 'jsonwebtoken'
 
 export const submitHandler = (
 	event: React.FormEvent,
@@ -29,4 +30,20 @@ export const submitHandler = (
 	}
 
 	return promise
+}
+
+export const validateJwt = (jwt: string): any => {
+	try {
+		if (jwt && process.env.REACT_APP_JWT_SECRET) {
+			const decoded = verify(jwt, process.env.REACT_APP_JWT_SECRET, {
+				ignoreNotBefore: true
+			})
+
+			if (decoded) return decoded
+		}
+
+		return null
+	} catch (err) {
+		return null
+	}
 }

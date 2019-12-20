@@ -7,21 +7,27 @@ import Routes from './Routes'
 import { setAuthenticationFromLocalStorage } from '../redux/authentication/authentication.effects'
 import { IAppProps, IState } from '../types/general.types'
 
+import styles from './App.module.scss'
+
 const App: React.FC<IAppProps> = ({
 	setAuthenticationFromLocalStorage,
-	user
+	loading
 }) => {
 	useEffect(() => {
 		setAuthenticationFromLocalStorage()
 	}, [setAuthenticationFromLocalStorage])
 
-	if (user) return <Routes />
-	return <LoadingScreen />
+	const renderApp = () => {
+		if (!loading) return <Routes />
+		return <LoadingScreen />
+	}
+
+	return <div className={styles.app}>{renderApp()}</div>
 }
 
 const mapStateToProps = (state: IState) => {
 	return {
-		user: state.authentication.user
+		loading: state.authentication.loading
 	}
 }
 

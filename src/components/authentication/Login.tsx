@@ -13,6 +13,7 @@ import {
 } from '../../types/authentication/authentication.types'
 import { IState } from '../../types/general.types'
 import { submitHandler } from '../../utils/authentication.utils'
+import LandingPageNavigation from '../navigation/LandingPageNavigation'
 import SubmitButton from '../ui/SubmitButton'
 
 import formStyles from '../../styles/forms.module.scss'
@@ -63,6 +64,7 @@ const Login: React.FC<ILoginProps> = ({
 
 	return (
 		<div className={styles.background}>
+			<LandingPageNavigation />
 			<div className={styles.content}>
 				<h1>{t('Login')}</h1>
 				{renderErrorMessage()}

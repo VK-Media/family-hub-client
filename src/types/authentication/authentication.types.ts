@@ -73,7 +73,7 @@ export interface ISetLoading extends Action {
 
 export interface ISetAuthenticationData extends Action {
 	type: 'setAuthenticationData'
-	payload: string
+	payload: ISetAuthenticationDataPayload
 }
 
 export interface ISetLoginError extends Action {
@@ -98,4 +98,9 @@ export interface IRegisterProps {
 	register(data: ICreateUserInput): () => void
 	loading: boolean
 	setLoading(loading: boolean): ISetLoading
+}
+
+export interface ISetAuthenticationDataPayload {
+	jwt: string
+	user: IUser
 }

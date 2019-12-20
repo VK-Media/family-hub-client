@@ -13,6 +13,7 @@ import {
 } from '../../types/authentication/authentication.types'
 import { IState } from '../../types/general.types'
 import { submitHandler } from '../../utils/authentication.utils'
+import LandingPageNavigation from '../navigation/LandingPageNavigation'
 import SubmitButton from '../ui/SubmitButton'
 
 import formStyles from '../../styles/forms.module.scss'
@@ -72,6 +73,7 @@ const Register: React.FC<IRegisterProps> = ({
 
 	return (
 		<div className={styles.background}>
+			<LandingPageNavigation />
 			<div className={styles.content}>
 				<h1>{t('Register')}</h1>
 				{renderErrorMessage()}
@@ -114,6 +116,7 @@ const Register: React.FC<IRegisterProps> = ({
 									name="password"
 									component="input"
 									type="password"
+									autoComplete="new-password"
 									className={formStyles.input}
 									placeholder={t('Password')}
 								/>
@@ -125,6 +128,7 @@ const Register: React.FC<IRegisterProps> = ({
 									name="repeatPassword"
 									component="input"
 									type="password"
+									autoComplete="new-password"
 									className={formStyles.input}
 									placeholder={t('Repeat Password')}
 								/>

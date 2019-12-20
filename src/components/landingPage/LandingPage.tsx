@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import LandingPageNavigation from '../navigation/LandingPageNavigation'
 import styles from './LandingPage.module.scss'
 
 const LandingPage: React.FC = () => {
@@ -7,6 +8,7 @@ const LandingPage: React.FC = () => {
 
 	return (
 		<div className={styles.background}>
+			<LandingPageNavigation />
 			<div className={styles.content}>
 				<h1>{t('Family Hub')}</h1>
 				<p>{t('The ultimate tool for managing your family')}</p>

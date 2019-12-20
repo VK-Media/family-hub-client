@@ -1,10 +1,10 @@
-import { verify } from 'jsonwebtoken'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { IState } from '../../types/general.types'
+import { validateJwt } from '../../utils/authentication.utils'
 
 interface IRequireAuthProps {
 	jwt: string
@@ -14,25 +14,7 @@ interface IRequireAuthProps {
 const RequireAuth: React.FC<IRequireAuthProps> = ({ jwt, children }) => {
 	const { t } = useTranslation()
 
-	const validateJwt = (): boolean => {
-		try {
-			if (jwt && process.env.REACT_APP_JWT_SECRET) {
-				const decoded = verify(jwt, process.env.REACT_APP_JWT_SECRET, {
-					ignoreNotBefore: true
-				})
-
-				if (decoded) {
-					return true
-				}
-			}
-
-			return false
-		} catch (err) {
-			return false
-		}
-	}
-
-	if (validateJwt()) {
+	if (validateJwt(jwt)) {
 		return <div>{children}</div>
 	} else {
 		return <Redirect to={t('/login')} />
